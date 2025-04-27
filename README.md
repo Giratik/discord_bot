@@ -15,7 +15,7 @@ Petit bot Discord utilisant OpenAI pour répondre aux questions.
 
 ## Installation locale
 
-
+```
 git clone https://github.com/ton-pseudo/discord_bot.git
 cd discord_bot
 python -m venv venv
@@ -23,7 +23,7 @@ source venv/bin/activate  # ou .\venv\Scripts\activate sur Windows
 pip install -r requirements.txt
 cp .env.example .env  # Crée ton fichier .env
 python main.py
-
+```
 
 
 ## 3. Préparer pour le **déploiement Cloud** 🚀
