@@ -15,7 +15,7 @@ Petit bot Discord utilisant OpenAI pour répondre aux questions.
 
 ## Installation locale
 
-```bash
+
 git clone https://github.com/ton-pseudo/discord_bot.git
 cd discord_bot
 python -m venv venv
@@ -25,11 +25,6 @@ cp .env.example .env  # Crée ton fichier .env
 python main.py
 
 
-
-
-
-
----
 
 ## 3. Préparer pour le **déploiement Cloud** 🚀
 
@@ -47,7 +42,6 @@ Tu peux maintenant l'héberger **gratuitement** sur un cloud comme **Railway** o
   - `OPENAI_API_KEY` = ta clé OpenAI
 - Railway détectera ton `python` et ton `requirements.txt` tout seul.
 
----
 
 ## 4. Ajouter un `Procfile` (important pour que Railway sache comment lancer ton bot)
 
@@ -59,7 +53,7 @@ Ajoute ce fichier tout simple :
 
 
 Puis tu le **commit & push** :
-```bash
+
 git add Procfile
 git commit -m "Ajout du Procfile pour Railway"
 git push
