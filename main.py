@@ -1,42 +1,35 @@
 import discord
-import openai
+from datetime import datetime
 import os
 from dotenv import load_dotenv
 
 # Charger les variables d'environnement
 load_dotenv()
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+TOKEN = os.getenv("DISCORD_TOKEN")
 
+# Crée une instance du client Discord
 intents = discord.Intents.default()
-intents.messages = True
 client = discord.Client(intents=intents)
 
-openai.api_key = OPENAI_API_KEY
-
+# Événement qui se déclenche lorsque le bot est prêt
 @client.event
 async def on_ready():
-    print(f'🤖 Connecté en tant que {client.user}')
+    print(f'Connecté en tant que {client.user}')
 
+# Événement qui se déclenche lorsqu'un message est reçu
 @client.event
 async def on_message(message):
+    # Ignore les messages envoyés par le bot lui-même pour éviter les boucles infinies
     if message.author == client.user:
         return
 
-    if message.content.startswith("!ask"):
-        prompt = message.content[5:].strip()
-        if not prompt:
-            await message.channel.send("Donne-moi une question après `!ask` !")
-            return
-        
-        try:
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[{"role": "user", "content": prompt}]
-            )
-            bot_reply = response.choices[0].message.content
-            await message.channel.send(bot_reply)
-        except Exception as e:
-            await message.channel.send(f"Erreur lors de l'appel à OpenAI : {e}")
+    # Vérifie si le message commence par la commande !date
+    if message.content.startswith('!date'):
+        # Obtient la date actuelle
+        now = datetime.now()
+        date_actuelle = now.strftime("%d/%m/%Y")
+        # Envoie la date dans le canal où la commande a été envoyée
+        await message.channel.send(f"La date actuelle est : {date_actuelle}")
 
-client.run(DISCORD_TOKEN)
+# Lance le bot avec le token
+client.run(TOKEN)
