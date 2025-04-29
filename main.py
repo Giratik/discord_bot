@@ -1,6 +1,7 @@
 import discord
 from datetime import datetime
 import os
+from discord.ext import commands
 from dotenv import load_dotenv
 
 # Charger les variables d'environnement
@@ -10,6 +11,10 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 # Crée une instance du client Discord
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
+
+intents.message_content = True
+bot=commands.Bot(command_prefix="--",case_insensitive=True,intents=intents)
+bot.remove_command("help")
 
 # Événement qui se déclenche lorsque le bot est prêt
 @client.event
